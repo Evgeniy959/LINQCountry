@@ -260,7 +260,24 @@ namespace LINQCountry
 
         private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e)
         {
+            list.Clear();
+            var listPopulAve_1 = from country in countries
+                                 where country.PartOfTheWorld == "Europe"
+                                 //where country.Territory == countries.Average(с => с.Territory)
+                                 select countries.Average(с => с.Territory);
+            //select country.Territory;
+            var listPopulAve_2 = countries // с ипользованием расширения (лямбд)
+                .Where(с => с.PartOfTheWorld == "Europe")
+                .Select(с => countries.Average(с => с.Territory));
+            //.Select(с => с.Name);
 
+            foreach (var item in listPopulAve_2)
+            {
+                list.Add(item.ToString());
+            }
+            list.Add(listPopulAve_2.ToString());
+            //list.Add(listPopulAve_1);
+            //Info.Text = listPopulAve_1;
         }
     }
 }
