@@ -257,5 +257,10 @@ namespace LINQCountry
                 list.Add(item);
             }
         }
+
+        private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
