@@ -23,9 +23,9 @@ namespace LINQCountry
     {
         List<Country> countries = new List<Country>
             {
-                new ("Russia", "Moscow", 146748590, 17098246, "Europe", 15558000, new List<string>{ "Moscow", "Novosibirsk", "Omsk" } ),
-                new ("France", "Paris", 63928608, 547030, "Europe", 7777777, new List<string>{ "Paris-2190327 чел", "Marcel" }),
-                new ("Austria", "Vienna", 8935112, 83879, "Europe", 4467000, new List<string>{ "Vienna", "Graz" }),
+                new ("Russia", "Moscow", 146748590, 5, "Europe", 15558000, new List<string>{ "Moscow", "Novosibirsk", "Omsk" } ),
+                new ("France", "Paris", 63928608, 5, "Europe", 7777777, new List<string>{ "Paris-2190327 чел", "Marcel" }),
+                new ("Austria", "Vienna", 8935112, 5, "Europe", 4467000, new List<string>{ "Vienna", "Graz" }),
                 new ("USA", "Washington", 332278200, 9826675, "North America", 23334508, new List<string>{ "New York", "Chicago" }),
                 new ("Japan", "Tokyo", 127000000, 377668, "Asia", 8888888, new List<string>{ "Tokyo", "Osaka" }),
                 new ("Egypt", "Cairo", 87266562, 1001449, "Africa", 9945780, new List<string>{ "Сairo", "Alexandria" }),
@@ -138,26 +138,12 @@ namespace LINQCountry
         {
             list.Clear();
             var listCap = from country in countries
-                          orderby country.Capital//.Substring(0, 1)
+                          orderby country.Capital
                           select country.Capital;
-            //var tamp = listCap.TakeWhile(x => x.StartsWith("M")).SkipWhile(x => x.StartsWith("M"));
-            /*foreach (var item in listCap.TakeWhile(x => x.StartsWith("M")).SkipWhile(x => x.StartsWith("M")))
+            foreach (var item in listCap.TakeWhile(x => x.StartsWith("C")))
             {
                 list.Add(item);
-            }*/
-            while (countries.Capital.TakeWhile(x => x.StartsWith("C")))
-            {
-                foreach (var item in listCap.TakeWhile(x => x.StartsWith("C")))
-                //foreach (var item in listCap.SkipWhile(x => x.StartsWith("C")))
-                {
-                    list.Add(item);
-                }
             }
-            /*foreach (var item in listCap.TakeWhile(x => x.StartsWith("C")))
-            //foreach (var item in listCap.SkipWhile(x => x.StartsWith("C")))
-            {
-                list.Add(item);
-            }*/
         }
 
         private void TerritoryRangeButton_Click(object sender, RoutedEventArgs e)
@@ -188,10 +174,7 @@ namespace LINQCountry
             list.Clear();
             var listTop5 = from country in countries
                              orderby country.Territory descending 
-                             //OrderByDescending country.Territory ThenBy
-                             //orderby country.Territory desc
                              select country.Name;
-            //var listTerMax = countries.Max(с => с.Territory).Select(с => с.Name);
             foreach (var item in listTop5)
             {
                 list.Add(item);
@@ -202,10 +185,7 @@ namespace LINQCountry
             list.Clear();
             var listTop5 = from country in countries
                              orderby country.PopulationOfCapital descending
-                             //OrderByDescending country.Territory ThenBy
-                             //orderby country.Territory desc
                              select country.Capital;
-            //var listTerMax = countries.Max(с => с.Territory).Select(с => с.Name);
             foreach (var item in listTop5)
             {
                 list.Add(item);
@@ -256,6 +236,28 @@ namespace LINQCountry
             {
                 list.Add(item);
             }
+        }
+
+        private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listPopulAve_1 = from country in countries
+                                 where country.PartOfTheWorld == "Europe" 
+                                 //where country.Territory == countries.Average(с => с.Territory)
+                                 select countries.Average(с => с.Territory);
+                                 //select country.Territory;
+            var listPopulAve_2 = countries // с ипользованием расширения (лямбд)
+                .Where(с => с.PartOfTheWorld == "Europe")
+                .Select(с => countries.Average(с => с.Territory));
+            //.Select(с => с.Name);
+
+            foreach (var item in listPopulAve_2)
+            {
+                list.Add(item.ToString());
+            }
+            list.Add(listPopulAve_2.ToString());
+            //list.Add(listPopulAve_1);
+            //Info.Text = listPopulAve_1;
         }
     }
 }
