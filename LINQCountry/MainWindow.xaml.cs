@@ -185,11 +185,22 @@ namespace LINQCountry
             list.Clear();
             var listTop5 = from country in countries
                              orderby country.PopulationOfCapital descending
-                             select country.Capital;
-            foreach (var item in listTop5)
+                            //where countries.Count() <= 5 
+                           select country.Capital;
+            /*var listCount = from country in countries
+                            select country;
+            //while(listCount.Count() <= 6)*/
+            //while(countries.Count() <= 5)
+            /*foreach (var item in listTop5)
+                while (item.Count() <= 5)
+                        list.Add(item);*/
+            /*for (int i = 0; i <5; i++ )
             {
+                /*foreach (var item in listTop5)
                 list.Add(item);
-            }
+                list.Add(listTop5.First());
+            }*/
+            //list.Add(listTop5);
         }
 
         private void TerritoryMaxButton_Click(object sender, RoutedEventArgs e)
@@ -250,7 +261,7 @@ namespace LINQCountry
                 .Where(с => с.PartOfTheWorld == "Europe")
                 //.Select(с => countries.Average(с => с.Territory));
             .Select(с => с.Territory);
-            var ave = listPopulAve_2.Average();
+            //double ave = listPopulAve_2.Average();
 
             /*foreach (var item in listPopulAve_1)
             {
@@ -258,8 +269,51 @@ namespace LINQCountry
             }*/
             //list.Add(listPopulAve_2.ToString());
             //list.Add(listPopulAve_1);
-            list.Add(ave.ToString());
-            Info.Text = ave.ToString();
+            /*list.Add(ave.ToString());
+            Info.Text = ave.ToString();*/
+            //Info.Text = listPopulAve_2.Average().ToString();
+            
+        }
+
+        private void CountCountryButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listCount = from country in countries
+                            select country;
+            list.Add(listCount.Count().ToString());
+        }
+
+        private void PartOfTheWorldButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listPart = from country in countries
+                                 //where country.PartOfTheWorld.Count() == Max()
+                                 //where country.Population == countries.Min(с => с.Population)
+                                 select country.PartOfTheWorld;
+            //if(listPart.Count())
+            list.Add(listPart.Count().ToString());
+            //Info.Text = listPart.ToString();
+        }
+
+        private void CountCountryPartOfTheWorldButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listCountEu = from country in countries
+                            where country.PartOfTheWorld == "Europe"
+                            select country;
+            list.Add(listCountEu.Count().ToString());
+            var listCountAsia = from country in countries
+                            where country.PartOfTheWorld == "Asia"
+                            select country;
+            list.Add(listCountAsia.Count().ToString());
+            var listCountAfrica = from country in countries
+                                where country.PartOfTheWorld == "Africa"
+                                select country;
+            list.Add(listCountAfrica.Count().ToString());
+            var listCountNA = from country in countries
+                                  where country.PartOfTheWorld == "North America"
+                                  select country;
+            list.Add(listCountNA.Count().ToString());
         }
     }
 }
