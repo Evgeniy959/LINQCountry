@@ -23,7 +23,7 @@ namespace LINQCountry
     {
         List<Country> countries = new List<Country>
             {
-                new ("Russia", "Moscow", 146748590, 5, "Europe", 15558000, new List<string>{ "Moscow", "Novosibirsk", "Omsk" } ),
+                new ("Russia", "Moscow", 146748590, 8, "Europe", 15558000, new List<string>{ "Moscow", "Novosibirsk", "Omsk" } ),
                 new ("France", "Paris", 63928608, 5, "Europe", 7777777, new List<string>{ "Paris-2190327 чел", "Marcel" }),
                 new ("Austria", "Vienna", 8935112, 5, "Europe", 4467000, new List<string>{ "Vienna", "Graz" }),
                 new ("USA", "Washington", 332278200, 9826675, "North America", 23334508, new List<string>{ "New York", "Chicago" }),
@@ -244,20 +244,22 @@ namespace LINQCountry
             var listPopulAve_1 = from country in countries
                                  where country.PartOfTheWorld == "Europe" 
                                  //where country.Territory == countries.Average(с => с.Territory)
-                                 select countries.Average(с => с.Territory);
-                                 //select country.Territory;
+                                 //select countries.Average(с => с.Territory);
+                                 select country.Territory;
             var listPopulAve_2 = countries // с ипользованием расширения (лямбд)
                 .Where(с => с.PartOfTheWorld == "Europe")
-                .Select(с => countries.Average(с => с.Territory));
-            //.Select(с => с.Name);
+                //.Select(с => countries.Average(с => с.Territory));
+            .Select(с => с.Territory);
+            var ave = listPopulAve_2.Average();
 
-            foreach (var item in listPopulAve_2)
+            /*foreach (var item in listPopulAve_1)
             {
                 list.Add(item.ToString());
-            }
-            list.Add(listPopulAve_2.ToString());
+            }*/
+            //list.Add(listPopulAve_2.ToString());
             //list.Add(listPopulAve_1);
-            //Info.Text = listPopulAve_1;
+            list.Add(ave.ToString());
+            Info.Text = ave.ToString();
         }
     }
 }
