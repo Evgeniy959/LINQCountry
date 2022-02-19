@@ -24,7 +24,7 @@ namespace LINQCountry
         List<Country> countries = new List<Country>
             {
                 new ("Russia", "Moscow", 146748590, 8, "Europe", 15558000, new List<string>{ "Moscow", "Novosibirsk", "Omsk" } ),
-                new ("France", "Paris", 63928608, 5, "Europe", 7777777, new List<string>{ "Paris-2190327 чел", "Marcel" }),
+                new ("France", "Paris", 63928608, 5, "Europe", 7777777, new List<string>{ "Paris", "Marcel" }),
                 new ("Austria", "Vienna", 8935112, 5, "Europe", 4467000, new List<string>{ "Vienna", "Graz" }),
                 new ("USA", "Washington", 332278200, 9826675, "North America", 23334508, new List<string>{ "New York", "Chicago" }),
                 new ("Japan", "Tokyo", 127000000, 377668, "Asia", 8888888, new List<string>{ "Tokyo", "Osaka" }),
@@ -173,8 +173,8 @@ namespace LINQCountry
         {
             list.Clear();
             var listTop5 = from country in countries
-                             orderby country.Territory descending 
-                             select country.Name;
+                           orderby country.Territory descending 
+                           select country.Name;
             foreach (var item in listTop5)
             {
                 list.Add(item);
@@ -184,23 +184,10 @@ namespace LINQCountry
         {
             list.Clear();
             var listTop5 = from country in countries
-                             orderby country.PopulationOfCapital descending
-                            //where countries.Count() <= 5 
+                           orderby country.PopulationOfCapital descending
                            select country.Capital;
-            /*var listCount = from country in countries
-                            select country;
-            //while(listCount.Count() <= 6)*/
-            //while(countries.Count() <= 5)
-            /*foreach (var item in listTop5)
-                while (item.Count() <= 5)
-                        list.Add(item);*/
-            /*for (int i = 0; i <5; i++ )
-            {
-                /*foreach (var item in listTop5)
+            foreach (var item in listTop5)
                 list.Add(item);
-                list.Add(listTop5.First());
-            }*/
-            //list.Add(listTop5);
         }
 
         private void TerritoryMaxButton_Click(object sender, RoutedEventArgs e)
@@ -258,8 +245,8 @@ namespace LINQCountry
             var listPopulAve_2 = countries // с ипользованием расширения (лямбд)
                 .Where(с => с.PartOfTheWorld == "Europe")
                 .Select(с => с.Territory);
-            list.Add(listPopulAve_2.Average().ToString());
-            Info.Text = listPopulAve_2.Average().ToString();
+            //list.Add(listPopulAve_2.Average().ToString());
+            //Info.Text = listPopulAve_2.Average().ToString();
             
         }
 
@@ -275,8 +262,7 @@ namespace LINQCountry
         {
             list.Clear();
             var listPart = from country in countries
-                                 //where country.PartOfTheWorld.Count() == Max()
-                                 //where country.Population == countries.Min(с => с.Population)
+                                 //where country.PartOfTheWorld.Count().Max()
                                  select country.PartOfTheWorld;
             //if(listPart.Count())
             list.Add(listPart.Count().ToString());
