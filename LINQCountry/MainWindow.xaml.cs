@@ -199,7 +199,7 @@ namespace LINQCountry
         }
         private void Top5CapitalButton_Click(object sender, RoutedEventArgs e)
         {
-            list.Clear();
+            /*list.Clear();
             var listTop5 = from country in countries
                              orderby country.PopulationOfCapital descending
                              //OrderByDescending country.Territory ThenBy
@@ -209,7 +209,27 @@ namespace LINQCountry
             foreach (var item in listTop5)
             {
                 list.Add(item);
-            }
+            }*/
+
+            list.Clear();
+            var listTop5 = from country in countries
+                           orderby country.PopulationOfCapital descending
+                           //where countries.Count() <= 5 
+                           select country.Capital;
+            /*var listCount = from country in countries
+                            select country;
+            //while(listCount.Count() <= 6)*/
+            //while(countries.Count() <= 5)
+            /*foreach (var item in listTop5)
+                while (item.Count() <= 5)
+                        list.Add(item);*/
+            /*for (int i = 0; i <5; i++ )
+            {
+                /*foreach (var item in listTop5)
+                list.Add(item);
+                list.Add(listTop5.First());
+            }*/
+            //list.Add(listTop5);
         }
 
         private void TerritoryMaxButton_Click(object sender, RoutedEventArgs e)
