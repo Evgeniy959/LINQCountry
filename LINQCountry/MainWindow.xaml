@@ -34,6 +34,9 @@
         <Button  Content="Столица с самым большим количеством жителей" Height="25" Width="444" Click="PopulationMaxButton_Click"/>
         <Button  Content="Страна с самой маленькой площадью в Европе" Height="25" Width="444" Click="TerritoryMinButton_Click"/>
         <Button  Content="Средняя площадь стран в Европе" Height="25" Width="444" Click="TerritoryAverageButton_Click"/>
+        <Button  Content="Общее количество стран" Height="25" Width="444" Click="CountCountryButton_Click"/>
+        <Button  Content="Часть света с максимальным количеством стран" Height="25" Width="444" Click="PartOfTheWorldButton_Click"/>
+        <Button  Content="Количество стран в каждой части света" Height="25" Width="444" Click="CountCountryPartOfTheWorldButton_Click"/>
 
     </StackPanel>
 </Window>
