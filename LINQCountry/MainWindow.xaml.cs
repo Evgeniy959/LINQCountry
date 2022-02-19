@@ -145,14 +145,14 @@ namespace LINQCountry
             {
                 list.Add(item);
             }*/
-            while (countries.Capital.TakeWhile(x => x.StartsWith("C")))
+            /*while (countries.Capital.TakeWhile(x => x.StartsWith("C")))
             {
                 foreach (var item in listCap.TakeWhile(x => x.StartsWith("C")))
                 //foreach (var item in listCap.SkipWhile(x => x.StartsWith("C")))
                 {
                     list.Add(item);
                 }
-            }
+            }*/
             /*foreach (var item in listCap.TakeWhile(x => x.StartsWith("C")))
             //foreach (var item in listCap.SkipWhile(x => x.StartsWith("C")))
             {
@@ -278,7 +278,7 @@ namespace LINQCountry
             }
         }
 
-        private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e)
+        /*private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e)
         {
             list.Clear();
             var listPopulAve_1 = from country in countries
@@ -298,6 +298,102 @@ namespace LINQCountry
             list.Add(listPopulAve_2.ToString());
             //list.Add(listPopulAve_1);
             //Info.Text = listPopulAve_1;
+        }*/
+        private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listPopulAve_1 = from country in countries
+                                 where country.PartOfTheWorld == "Europe"
+                                 //where country.Territory == countries.Average(с => с.Territory)
+                                 //select countries.Average(с => с.Territory);
+                                 select country.Territory;
+            var listPopulAve_2 = countries // с ипользованием расширения (лямбд)
+                .Where(с => с.PartOfTheWorld == "Europe")
+            //.Select(с => countries.Average(с => с.Territory));
+            .Select(с => с.Territory);
+            //double ave = (uint[])(listPopulAve_1).Average();
+
+            /*foreach (var item in listPopulAve_1)
+            {
+                list.Add(item.ToString());
+            }*/
+            /*foreach (var item in listPopulAve_1)
+            {
+                int[] numbers = { item };
+            }*/
+            //int[] numbers = listPopulAve_1.Average();
+
+            //list.Add(listPopulAve_2.ToString());
+            //list.Add(listPopulAve_1);
+            /*list.Add(ave.ToString());
+            Info.Text = ave.ToString();*/
+            //Info.Text = listPopulAve_2.Average().ToString();
+
         }
+
+        private void CountCountryButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listCount = from country in countries
+                            select country;
+            list.Add(listCount.Count().ToString());
+        }
+
+        private void PartOfTheWorldButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listPart = from country in countries
+                               //where country.PartOfTheWorld.Count() 
+                               //where country.Population == countries.Min(с => с.Population)
+                           select country.PartOfTheWorld;
+            //if(listPart.Count())
+            list.Add(listPart.Count().ToString());
+            //Info.Text = listPart.ToString();
+        }
+
+        private void CountCountryPartOfTheWorldButton_Click(object sender, RoutedEventArgs e)
+        {
+            list.Clear();
+            var listCountEu = from country in countries
+                              where country.PartOfTheWorld == "Europe"
+                              select country;
+            list.Add(listCountEu.Count().ToString());
+            var listCountAsia = from country in countries
+                                where country.PartOfTheWorld == "Asia"
+                                select country;
+            list.Add(listCountAsia.Count().ToString());
+            var listCountAfrica = from country in countries
+                                  where country.PartOfTheWorld == "Africa"
+                                  select country;
+            list.Add(listCountAfrica.Count().ToString());
+            var listCountNA = from country in countries
+                              where country.PartOfTheWorld == "North America"
+                              select country;
+            list.Add(listCountNA.Count().ToString());
+            int[] numbers = { listCountEu.Count(), listCountAsia.Count(), listCountAfrica.Count(), listCountNA.Count() };
+            list.Add(numbers.Max().ToString());
+            //if (countries.Count() == numbers.Max())
+            int count = 3;
+            if (count == numbers.Max()) 
+            {
+                foreach (var item in countries)
+                {
+                    list.Add(item.PartOfTheWorld.ToString());
+                }
+                /*var listCount = from country in countries
+                                select country.PartOfTheWorld;*/
+            }
+                //list.Add(countries.PartOfTheWorld)
+
+            /*var listCount = from country in countries
+                            select country.PartOfTheWorld;*/
+            //list.Add(listCount);
+            /*foreach (var item in listCount)
+            {
+                list.Add(item.ToString());
+            }*/
+            
+        }
+
     }
 }
