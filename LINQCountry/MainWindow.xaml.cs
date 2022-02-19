@@ -254,24 +254,12 @@ namespace LINQCountry
             list.Clear();
             var listPopulAve_1 = from country in countries
                                  where country.PartOfTheWorld == "Europe" 
-                                 //where country.Territory == countries.Average(с => с.Territory)
-                                 //select countries.Average(с => с.Territory);
                                  select country.Territory;
             var listPopulAve_2 = countries // с ипользованием расширения (лямбд)
                 .Where(с => с.PartOfTheWorld == "Europe")
-                //.Select(с => countries.Average(с => с.Territory));
-            .Select(с => с.Territory);
-            double ave = (uint[])(listPopulAve_1).Average();
-
-            /*foreach (var item in listPopulAve_1)
-            {
-                list.Add(item.ToString());
-            }*/
-            //list.Add(listPopulAve_2.ToString());
-            //list.Add(listPopulAve_1);
-            /*list.Add(ave.ToString());
-            Info.Text = ave.ToString();*/
-            //Info.Text = listPopulAve_2.Average().ToString();
+                .Select(с => с.Territory);
+            list.Add(listPopulAve_2.Average().ToString());
+            Info.Text = listPopulAve_2.Average().ToString();
             
         }
 
