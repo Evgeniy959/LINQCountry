@@ -261,7 +261,7 @@ namespace LINQCountry
                 .Where(с => с.PartOfTheWorld == "Europe")
                 //.Select(с => countries.Average(с => с.Territory));
             .Select(с => с.Territory);
-            //double ave = listPopulAve_2.Average();
+            double ave = (uint[])(listPopulAve_1).Average();
 
             /*foreach (var item in listPopulAve_1)
             {
