@@ -25,7 +25,7 @@ namespace LINQCountry
             {
                 new ("Russia", "Moscow", 146748590, 17098246, "Europe", 15558000, new List<string>{ "Moscow", "Novosibirsk", "Omsk" } ),
                 new ("France", "Paris", 63928608, 547030, "Europe", 7777777, new List<string>{ "Paris", "Marcel" }),
-                new ("Austria", "Vienna", 8935112, 5, "Europe", 4467000, new List<string>{ "Vienna", "Graz" }),
+                new ("Austria", "Vienna", 8935112, 83879, "Europe", 4467000, new List<string>{ "Vienna", "Graz" }),
                 new ("USA", "Washington", 332278200, 9826675, "North America", 23334508, new List<string>{ "New York", "Chicago" }),
                 new ("Japan", "Tokyo", 127000000, 377668, "Asia", 8888888, new List<string>{ "Tokyo", "Osaka" }),
                 new ("Egypt", "Cairo", 87266562, 1001449, "Africa", 9945780, new List<string>{ "Сairo", "Alexandria" }),
@@ -236,7 +236,7 @@ namespace LINQCountry
             }
         }
 
-        private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e)
+        private void TerritoryAverageButton_Click(object sender, RoutedEventArgs e) // до работать
         {
             list.Clear();
             var listPopulAve_1 = from country in countries
@@ -258,13 +258,12 @@ namespace LINQCountry
             list.Add(listCount.Count().ToString());
         }
 
-        private void PartOfTheWorldButton_Click(object sender, RoutedEventArgs e)
+        private void PartOfTheWorldButton_Click(object sender, RoutedEventArgs e) // до работать
         {
             list.Clear();
             var listPart = from country in countries
-                                 //where country.PartOfTheWorld.Count().Max()
-                                 select country.PartOfTheWorld;
-            //if(listPart.Count())
+                           //where country.PartOfTheWorld.Count().Max() 
+                           select country.PartOfTheWorld;
             list.Add(listPart.Count().ToString());
             //Info.Text = listPart.ToString();
         }
