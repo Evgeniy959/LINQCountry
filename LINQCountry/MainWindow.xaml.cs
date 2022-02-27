@@ -37,7 +37,6 @@ namespace LINQCountry
             InitializeComponent();
             list = new ObservableCollection<string>();
             ListInfo.ItemsSource = list;
-
         }
 
         private void InfoCountryButton_Click(object sender, RoutedEventArgs e)
