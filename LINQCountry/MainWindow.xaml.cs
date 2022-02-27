@@ -245,8 +245,7 @@ namespace LINQCountry
                 .Where(с => с.PartOfTheWorld == "Europe")
                 .Select(с => с.Territory);
             //list.Add(listPopulAve_2.Average().ToString());
-            //Info.Text = listPopulAve_2.Average().ToString();
-            
+            //Info.Text = listPopulAve_2.Average().ToString();            
         }
 
         private void CountCountryButton_Click(object sender, RoutedEventArgs e)
