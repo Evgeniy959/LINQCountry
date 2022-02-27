@@ -172,9 +172,9 @@ namespace LINQCountry
         private void Top5CountryButton_Click(object sender, RoutedEventArgs e)
         {
             list.Clear();
-            var listTop5 = from country in countries
+            var listTop5 = (from country in countries
                            orderby country.Territory descending 
-                           select country.Name;
+                           select country.Name).Take(5);
             foreach (var item in listTop5)
             {
                 list.Add(item);
@@ -183,9 +183,9 @@ namespace LINQCountry
         private void Top5CapitalButton_Click(object sender, RoutedEventArgs e)
         {
             list.Clear();
-            var listTop5 = from country in countries
+            var listTop5 = (from country in countries
                            orderby country.PopulationOfCapital descending
-                           select country.Capital;
+                           select country.Capital).Take(5);
             foreach (var item in listTop5)
                 list.Add(item);
         }
